@@ -10,9 +10,9 @@ public class Product {
     private String name;
     private String description;
     private BigDecimal price;
-    private  BigDecimal iva;
+    private  int iva;
 
-    public Product(String name, String description, double price, double iva) {
+    public Product(String name, String description, double price, int iva) {
         Random randomGenerator= new Random();
         this.code = randomGenerator.nextInt(100);
         setName(name);
@@ -52,15 +52,15 @@ public class Product {
     }
 
     public String getIva() {
-        return iva.setScale(2, RoundingMode.HALF_UP) + "%";
+        return iva + "%";
     }
 
-    public void setIva(double iva) {
-        this.iva = iva > 0 ? new BigDecimal(iva) : new BigDecimal(1);
+    public void setIva(int iva) {
+        this.iva = iva > 0 ? iva : 1;
     }
 
     public String getPriceIncludingVat(){
-        return price.add(price.multiply(iva.divide(BigDecimal.valueOf(100)))).setScale(2, RoundingMode.HALF_UP) +"€";
+        return price.add(price.multiply(BigDecimal.valueOf((double) iva / 100))).setScale(2, RoundingMode.HALF_UP) + "€";
     }
 
     public String getExtendedName(){
