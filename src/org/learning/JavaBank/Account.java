@@ -1,21 +1,23 @@
 package org.learning.JavaBank;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Random;
 
 public class Account {
     private int code;
     private String name;
-    private double balance;
+    private BigDecimal balance;
 
     public Account(String name) {
         Random randomGenerator= new Random();
         setName(name);
-        balance=0;
+        balance= new BigDecimal(0);
         code= randomGenerator.nextInt(1000) + 1;
     }
 
-    public int getCode() {
-        return code;
+    public String getCode() {
+        return String.format("%04d",code);
     }
 
     public String getName() {
@@ -27,20 +29,20 @@ public class Account {
     }
 
     public String getBalance() {
-        return balance + "€";
+        return balance.setScale(2, RoundingMode.HALF_UP) + "€";
     }
 
     public String withdraw(double amount) {
-        if(this.balance >= amount){
-            this.balance -= amount;
-            return "---------\nHai prelevato " + amount + "€, il tuo saldo rimanente è di:" + this.balance + "€";
+        if(this.balance.doubleValue() >= amount){
+            this.balance= this.balance.subtract(BigDecimal.valueOf(amount));
+            return "---------\nHai prelevato " + (new BigDecimal(amount).setScale(2, RoundingMode.HALF_UP)) + "€, il tuo saldo rimanente è di " + this.balance.setScale(2, RoundingMode.HALF_UP) + "€\n---------";
         } else{
-        return "---------\nSaldo insufficiente";
+        return "---------\nSaldo insufficiente\n---------";
         }
     }
 
     public String deposit(double amount){
-        this.balance += amount;
-        return "---------\nHai depositato " + amount + "€. Il tuo saldo attuale: " + this.balance + "€";
+        this.balance= this.balance.add(BigDecimal.valueOf(amount));
+        return "---------\nHai depositato " + (new BigDecimal(amount).setScale(2, RoundingMode.HALF_UP)) + "€. Il tuo saldo attuale: " + this.balance.setScale(2, RoundingMode.HALF_UP) + "€\n---------";
     }
 }
