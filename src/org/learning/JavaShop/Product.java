@@ -14,7 +14,7 @@ public class Product {
 
     public Product(String name, String description, double price, int iva) {
         Random randomGenerator= new Random();
-        this.code = randomGenerator.nextInt(100);
+        this.code = randomGenerator.nextInt(1,1000000);
         setName(name);
         setDescription(description);
         setPrice(price);
