@@ -47,7 +47,7 @@ public class JavaShop {
         System.out.println("Dimensioni schermo: " + tv2.getScreenSize());
         System.out.println("Smart: " + tv2.isSmart());
 
-        HeadPhones headPhones1= new HeadPhones("Panasonic RP-HT161", "Panasonic RP-HT161 Cuffie Cablato A Padiglione MUSICA Nero", 19,20, "black", false);
+        HeadPhones headPhones1= new HeadPhones("Panasonic RP-HT161", "Panasonic RP-HT161 Cuffie Cablato A Padiglione MUSICA Nero", 19.99,20, "black", false);
         System.out.println();
         System.out.println("Codice prodotto: " + headPhones1.getCode());
         System.out.println("Nome prodotto: " + headPhones1.getName());
