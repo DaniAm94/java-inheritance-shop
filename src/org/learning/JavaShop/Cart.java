@@ -1,10 +1,23 @@
 package org.learning.JavaShop;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Scanner;
 
 public class Cart {
     public static void main(String[] args) {
         Scanner scanner= new Scanner(System.in);
+
+        System.out.print("Hai una carta fedeltà? ");
+        String loyaltyCard;
+        do {
+            loyaltyCard= scanner.nextLine().trim();
+            if ((!loyaltyCard.toLowerCase().equals("si") && !loyaltyCard.toLowerCase().equals("no"))){
+                System.out.println("Scelta non valida. Scrivi si o no");
+            }
+        }while (!loyaltyCard.toLowerCase().equals("si") && !loyaltyCard.toLowerCase().equals("no"));
+        boolean hasLoyaltyCard= loyaltyCard.toLowerCase().equals("si")? true : false;
+
         System.out.print("Quanti prodotti vuoi aggiungere nel carrello? ");
         int productNumber= Integer.parseInt(scanner.nextLine());
         Product[] cart= new Product[productNumber];
@@ -32,7 +45,7 @@ public class Cart {
                         System.out.print("Inserisci la memoria del prodotto: ");
                         int memory= Integer.parseInt(scanner.nextLine());
 
-                        cart[i] = new Smartphone(name,description,price,iva,memory);
+                        cart[i] = new Smartphone(name,description,price,iva,memory, hasLoyaltyCard);
 
                         break;
 
@@ -50,7 +63,7 @@ public class Cart {
                             }
                         }while (!smart.toLowerCase().equals("si") && !smart.toLowerCase().equals("no"));
                         boolean isSmart= smart.toLowerCase().equals("si")? true : false;
-                        cart[i] = new Tv(name,description,price,iva,size, isSmart);
+                        cart[i] = new Tv(name,description,price,iva,size, isSmart, hasLoyaltyCard);
 
                         break;
 
@@ -68,7 +81,7 @@ public class Cart {
                             }
                         }while (!wireless.toLowerCase().equals("si") && !wireless.toLowerCase().equals("no"));
                         boolean isWireless= wireless.toLowerCase().equals("si")? true : false;
-                        cart[i] = new HeadPhones(name,description,price,iva,color, isWireless);
+                        cart[i] = new HeadPhones(name,description,price,iva,color, isWireless, hasLoyaltyCard);
 
                         break;
 
@@ -78,9 +91,11 @@ public class Cart {
                 }
             } while (choice != 1 && choice != 2 && choice != 3);
         }
-
+        BigDecimal totalPrice= BigDecimal.ZERO;
         for (int i = 0; i < cart.length; i++) {
             System.out.println(cart[i]);
+            totalPrice= totalPrice.add(cart[i].discountedPrice);
         }
+        System.out.println("Prezzo del carrello: " + totalPrice.setScale(2, RoundingMode.HALF_UP) + "€");
     }
 }

@@ -11,14 +11,18 @@ public class Product {
     protected String description;
     protected BigDecimal price;
     protected   int iva;
+    protected BigDecimal priceIncludingVat;
+    protected BigDecimal discountedPrice;
 
-    public Product(String name, String description, double price, int iva) {
+    public Product(String name, String description, double price, int iva, boolean hasLoyaltyCard) {
         Random randomGenerator= new Random();
         this.code = randomGenerator.nextInt(1,1000000);
         setName(name);
         setDescription(description);
         setPrice(price);
         setIva(iva);
+        setPriceIncludingVat();
+        setDiscountedPrice(hasLoyaltyCard);
     }
 
     public String getCode() {
@@ -60,11 +64,23 @@ public class Product {
     }
 
     public String getPriceIncludingVat(){
-        return price.add(price.multiply(BigDecimal.valueOf((double) iva / 100))).setScale(2, RoundingMode.HALF_UP) + "€";
+        return priceIncludingVat.setScale(2, RoundingMode.HALF_UP) + "€";
+    }
+
+    public void setPriceIncludingVat(){
+        this.priceIncludingVat= new BigDecimal(String.valueOf(price.add(price.multiply(BigDecimal.valueOf((double) iva / 100)))));
     }
 
     public String getExtendedName(){
         return String.format("%06d", code) + "-" + name;
+    }
+
+    public String getDiscountedPrice(){
+    return discountedPrice.setScale(2, RoundingMode.HALF_UP) + "€";
+    }
+
+    public void setDiscountedPrice(boolean hasLoyaltyCard){
+       this.discountedPrice= hasLoyaltyCard?  priceIncludingVat.subtract(priceIncludingVat.multiply(BigDecimal.valueOf((double) 2/100))) : priceIncludingVat;
     }
 
     @Override

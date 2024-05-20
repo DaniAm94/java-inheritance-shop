@@ -1,13 +1,17 @@
 package org.learning.JavaShop;
 
+import java.math.BigDecimal;
+
 public class Tv extends Product{
     private int screenSize;
     private boolean smart;
 
-    public Tv(String name, String description, double price, int iva, int screenSize, boolean smart){
-        super(name, description, price, iva);
+    public Tv(String name, String description, double price, int iva, int screenSize, boolean smart, boolean hasLoyaltyCard){
+        super(name, description, price, iva, hasLoyaltyCard);
         setSmart(smart);
         setScreenSize(screenSize);
+        setPriceIncludingVat();
+        setDiscountedPrice(hasLoyaltyCard);
     }
 
     public String isSmart() {
@@ -31,17 +35,26 @@ public class Tv extends Product{
     }
 
     @Override
+    public void setDiscountedPrice(boolean hasLoyaltyCard) {
+        if(!this.smart && hasLoyaltyCard){
+            this.discountedPrice = priceIncludingVat.subtract(priceIncludingVat.multiply(BigDecimal.valueOf((double) 10/100)));
+        }else{
+            super.setDiscountedPrice(hasLoyaltyCard);
+        }
+    }
+
+    @Override
     public String toString() {
         return "Tv{" +
                 "code=" + getCode() +
-                ", description='" + getDescription() + '\'' +
                 ", name='" + getName() + '\'' +
-                ", price=" + getPrice() +
-                ", iva=" + getIva() +
+                ", description='" + getDescription() + '\'' +
                 ", screenSize=" + getScreenSize() +
                 ", smart=" + isSmart() +
-                ", extended name='" + getExtendedName() + '\'' +
-                ", price including iva=" + getPriceIncludingVat() +
+                ", price=" + getPrice() +
+                ", iva=" + getIva() +
+                ", priceIncludingVat=" + getPriceIncludingVat() +
+                ", discountedPrice=" + getDiscountedPrice() +
                 '}';
     }
 }

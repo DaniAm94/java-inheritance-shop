@@ -1,13 +1,17 @@
 package org.learning.JavaShop;
 
+import java.math.BigDecimal;
+
 public class HeadPhones extends Product{
  private String color;
  private boolean wireless;
 
-    public HeadPhones(String name, String description, double price, int iva, String color, boolean wireless){
-        super(name, description, price, iva);
+    public HeadPhones(String name, String description, double price, int iva, String color, boolean wireless, boolean hasLoyaltyCard){
+        super(name, description, price, iva, hasLoyaltyCard);
         setColor(color);
         setWireless(wireless);
+        setPriceIncludingVat();
+        setDiscountedPrice(hasLoyaltyCard);
     }
 
     public String getColor() {
@@ -27,17 +31,26 @@ public class HeadPhones extends Product{
     }
 
     @Override
+    public void setDiscountedPrice(boolean hasLoyaltyCard) {
+        if(!this.wireless && hasLoyaltyCard){
+            this.discountedPrice = priceIncludingVat.subtract(priceIncludingVat.multiply(BigDecimal.valueOf((double) 7/100)));
+        }else{
+            super.setDiscountedPrice(hasLoyaltyCard);
+        }
+    }
+
+    @Override
     public String toString() {
         return "HeadPhones{" +
                 "code=" + getCode() +
                 ", name='" + getName() + '\'' +
                 ", description='" + getDescription() + '\'' +
-                ", price=" + getPrice() +
-                ", iva=" + getIva() +
                 ", color='" + getColor() + '\'' +
                 ", wireless=" + isWireless() +
-                ", extended name='" + getExtendedName() + '\'' +
-                ", price including iva=" + getPriceIncludingVat() +
+                ", price=" + getPrice() +
+                ", iva=" + getIva() +
+                ", priceIncludingVat=" + getPriceIncludingVat() +
+                ", discountedPrice=" + getDiscountedPrice() +
                 '}';
     }
 }
