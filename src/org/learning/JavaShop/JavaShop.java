@@ -46,5 +46,29 @@ public class JavaShop {
         System.out.println("Nome esteso: " + tv2.getExtendedName());
         System.out.println("Dimensioni schermo: " + tv2.getScreenSize());
         System.out.println("Smart: " + tv2.isSmart());
+
+        HeadPhones headPhones1= new HeadPhones("Panasonic RP-HT161", "Panasonic RP-HT161 Cuffie Cablato A Padiglione MUSICA Nero", 19,20, "black", false);
+        System.out.println();
+        System.out.println("Codice prodotto: " + headPhones1.getCode());
+        System.out.println("Nome prodotto: " + headPhones1.getName());
+        System.out.println("Descrizione prodotto: " + headPhones1.getDescription());
+        System.out.println("Prezzo prodotto: " + headPhones1.getPrice());
+        System.out.println("Iva prodotto: " + headPhones1.getIva());
+        System.out.println("Prezzo comprensivo di Iva: " + headPhones1.getPriceIncludingVat());
+        System.out.println("Nome esteso: " + headPhones1.getExtendedName());
+        System.out.println("Colore: " + headPhones1.getColor());
+        System.out.println("Wireless: " + headPhones1.isWireless());
+
+        HeadPhones headPhones2= new HeadPhones("Sony WH-CH720N", "Sony WH-CH720N Cuffie Bluetooth wireless con cancellazione del rumore - Durata della batteria fino a 35 ore e ricarica rapida - Bianco", 69,20, "white", true);
+        System.out.println();
+        System.out.println("Codice prodotto: " + headPhones2.getCode());
+        System.out.println("Nome prodotto: " + headPhones2.getName());
+        System.out.println("Descrizione prodotto: " + headPhones2.getDescription());
+        System.out.println("Prezzo prodotto: " + headPhones2.getPrice());
+        System.out.println("Iva prodotto: " + headPhones2.getIva());
+        System.out.println("Prezzo comprensivo di Iva: " + headPhones2.getPriceIncludingVat());
+        System.out.println("Nome esteso: " + headPhones2.getExtendedName());
+        System.out.println("Colore: " + headPhones2.getColor());
+        System.out.println("Wireless: " + headPhones2.isWireless());
     }
 }
