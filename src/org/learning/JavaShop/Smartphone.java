@@ -28,4 +28,19 @@ public class Smartphone extends Product {
     private int valueOrDefault(int value){
         return value > 0 ? value : 1;
     }
+
+    @Override
+    public String toString() {
+        return "Smartphone{" +
+                "code=" + getCode() +
+                ", name='" + getName() + '\'' +
+                ", description='" + getDescription() + '\'' +
+                ", price=" + getPrice() +
+                ", iva=" + getIva() +
+                ", imeiCode='" + getImeiCode() + '\'' +
+                ", memory=" + getMemory() +
+                ", extended name='" + getExtendedName() + '\'' +
+                ", price including iva=" + getPriceIncludingVat() +
+                '}';
+    }
 }

@@ -6,11 +6,11 @@ import java.util.Random;
 
 public class Product {
 
-    private int code;
-    private String name;
-    private String description;
-    private BigDecimal price;
-    private  int iva;
+    protected int code;
+    protected String name;
+    protected String description;
+    protected BigDecimal price;
+    protected   int iva;
 
     public Product(String name, String description, double price, int iva) {
         Random randomGenerator= new Random();
